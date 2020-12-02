@@ -39,15 +39,6 @@ public class SachTester {
             Logger.getLogger(SachTester.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    @Test
-    public void TestSachSize() throws SQLException
-    {
-        sach = SachServices.getInfoSach();
-        
-        Assert.assertEquals(6, sach.size());
-    }
-    
     @Test 
     public void TestDataSaving() throws SQLException
     {
@@ -56,6 +47,15 @@ public class SachTester {
         
         Assert.assertEquals(2009, s.getNamXB());
     }
+    @Test
+    public void TestSachSize() throws SQLException
+    {
+        sach = SachServices.getInfoSach();
+        
+        Assert.assertEquals(6, sach.size());
+    }
+    
+    
     
     
 }

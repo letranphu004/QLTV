@@ -65,13 +65,27 @@ public class MuonSachServices {
         return false;
     }
     
-    public static void xoaMuon(int id) throws SQLException
+    public static boolean xoaMuon(int id) throws SQLException
     {
         Connection conn = Utils.getConn();
-        String sql = "DELETE FROM muonsach WHERE IdDocGia=?";
-        try (PreparedStatement stm = conn.prepareStatement(sql)) {
-            stm.setInt(1,id );
-            stm.executeUpdate();
+        try{
+            conn.setAutoCommit(false);
+            String sql = "DELETE FROM muonsach WHERE IdDocGia=?";
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
+                stm.setInt(1,id );
+                stm.executeUpdate();
+                
+            }
+            conn.commit();
+            return true;
+        }catch(SQLException ex) {
+            ex.getStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(DocGiaServices.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
+        return false;
     }
 }

@@ -9,6 +9,7 @@ import com.ltp.Services.MuonSachServices;
 import com.ltp.Services.Utils;
 import com.ltp.pojo.MuonSach;
 import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,6 +48,27 @@ public class MuonSachTester {
         boolean kq =  MuonSachServices.addMuon(test);  
         Assert.assertTrue(kq);
     }
+    @Test
+    public void TestXoaMuon() throws SQLException
+    {
+        MuonSach test1 = new MuonSach(3, "Lão Hạc", "2020/30/11");
+        MuonSachServices.addMuon(test1);
+        
+       boolean kq = MuonSachServices.xoaMuon(3);
+       Assert.assertTrue(kq);   
+    }
+    
+    @Test
+    public void TestDataXoaMuon() throws SQLException
+    {
+        MuonSach test2 = new MuonSach(4, "Lão Hạc", "2020/30/11");
+        MuonSachServices.addMuon(test2);
+        
+        MuonSachServices.xoaMuon(4);
+        List<MuonSach> kq = MuonSachServices.getInfoMuonSach("4");  
+        Assert.assertTrue(kq.isEmpty());
+    }
+    
     
     @Test
     public void TestMuonSach() throws SQLException
@@ -64,6 +86,9 @@ public class MuonSachTester {
         List<MuonSach> kq = MuonSachServices.getInfoMuonSach("2");
         Assert.assertEquals(3, kq.size());      
     }
+    
+    
+    
     
     
 }

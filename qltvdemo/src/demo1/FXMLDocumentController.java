@@ -202,7 +202,7 @@ public class FXMLDocumentController implements Initializable {
             JOptionPane.showMessageDialog(null, "Đã trễ "+ soNgayKhac + "ngày Phải trả phạt " +phat+ "Đ");
         else
             JOptionPane.showMessageDialog(null, "Trả đúng ngày");
-        MuonSachServices.xoaMuon(parseInt(txtId.getText()));
+        boolean xoaMuon = MuonSachServices.xoaMuon(parseInt(txtId.getText()));
         //refresh lai table
         ObservableList<MuonSach> dataList = FXCollections.observableArrayList();
         dataList.addAll(getInfoMuonSach(txtId.getText()));
